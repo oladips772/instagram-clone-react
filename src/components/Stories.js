@@ -40,7 +40,7 @@ const stories = [
 
 const Stories = () => {
   return (
-    <div className="flex flex-row items-center p-2 border border-slate-200 h-[80px] space-x-2 overflow-x-scroll w-full">
+    <div className="flex items-center p-2 border border-slate-200 h-[80px] space-x-2 overflow-x-scroll w-full">
       {stories.map((story, index) => (
         <div key={index}>
           <img

@@ -5,8 +5,18 @@ import {
   AiOutlineHeart,
   AiOutlinePlusCircle,
 } from "react-icons/ai";
+import { auth, provider } from "../firebase";
+import { signInWithPopup } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 function Header() {
+  const [user] = useAuthState(auth);
+  console.log(user);
+
+  function login() {
+    signInWithPopup(auth, provider);
+  }
+
   return (
     <div className="flex items-center justify-around h-[55px] shadow">
       <img
@@ -18,11 +28,15 @@ function Header() {
         <AiFillHome size={26} />
         <AiOutlineHeart size={26} />
         <AiOutlinePlusCircle size={26} />
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1200px-User-avatar.svg.png"
-          alt=""
-          className="h-[30px] w-[30px] rounded-full"
-        />
+        {user ? (
+          <img
+            src={user.photoURL}
+            alt=""
+            className="h-[30px] w-[30px] rounded-full"
+          />
+        ) : (
+          <button onClick={login}>Login</button>
+        )}
       </div>
     </div>
   );
